@@ -1,0 +1,39 @@
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+version: '0.2'
+language: en
+words:
+  - lucide
+  - sveltekit
+  - tailwindcss
+  - TURSO
+  - vite
+  - libsql
+  - Pascal
+  - Vicheka
+  - Veansna
+  - prepush
+ignorePaths:
+  - node_modules/**
+  - .svelte-kit/**
+  - build/**
+  - package-lock.json
+  - .gitignore
+  - .vscode/**
+  - dist/**
+  - .prettierignore
+  - eslint.config.js
+  - drizzle.config.js
+  - vite.config.js
+  - tsconfig.json
+  - pnpm-lock.yaml
+  - .git/**
+  - .env
+  - drizzle/**
+  - lefthook.yml
+  - src/lib/server/data/n3vocab.txt
+  - static/decks/**
+  - cspell.config.yaml
+import:
+  - '@cspell/dict-typescript/cspell-ext.json'
+  - '@cspell/dict-html/cspell-ext.json'
+  - '@cspell/dict-css/cspell-ext.json'
