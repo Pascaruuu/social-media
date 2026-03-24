@@ -1,0 +1,49 @@
+# lefthook.yml
+
+pre-commit:
+  parallel: true
+  commands:
+    # prevent-main-commit:
+    #   skip: git diff --cached --quiet
+    #   run: pnpm prevent-main-commit
+
+    # prettier
+    format:
+      glob: '*.{js,jsx,ts,tsx,svelte,json,md,css,html,yml,yaml}'
+      run: pnpm exec prettier --check --write --ignore-unknown {staged_files} && git add {staged_files}
+
+    # esLint
+    lint:
+      glob: '*.{js,jsx,ts,tsx,svelte}'
+      run: pnpm exec eslint --quiet --cache --cache-strategy content {staged_files}
+
+    #CSpell
+    spell-check:
+      glob: '{src/**/*.{svelte,ts,js,css,html},*.config.{js,ts},README.md}'
+      run: pnpm exec cspell {staged_files}
+
+    # 3. Svelte-specific Type Checking
+    # This usually needs the whole project context, so we run the full script
+    svelte-check:
+      run: pnpm check
+
+    audit:
+      run: pnpm audit --audit-level=high
+
+  fail-text: push blocked due to build or test failures
+    please resolve the issues above before pushing.
+
+pre-push:
+  parallel: true
+  commands:
+    type-check:
+      glob: '*.{js,jsx,ts,tsx,svelte}'
+      run: pnpm check
+    # test-unit:
+    #   glob: '*.{js,jsx,ts,tsx,svelte,css}'
+    #   run: pnpm run test:unit --run
+    # test-e2e:
+    #   glob: '{*.{js,jsx,ts,tsx,svelte},package.json}'
+    #   run: pnpm run test:e2e
+  fail-text: push blocked due to build or test failures
+    please resolve the issues above before pushing.
