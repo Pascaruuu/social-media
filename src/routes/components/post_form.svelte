@@ -8,6 +8,7 @@
 		form_action = '?/create_post',
 		submit_label = 'Publish post',
 		cancel_href = '/',
+		return_to = '/',
 		confirm_cancel = false,
 		confirm_submit = false,
 		cancel_confirm_title = 'Discard changes?',
@@ -21,6 +22,7 @@
 		form_action?: string
 		submit_label?: string
 		cancel_href?: string
+		return_to?: string
 		confirm_cancel?: boolean
 		confirm_submit?: boolean
 		cancel_confirm_title?: string
@@ -73,6 +75,7 @@
 	</div>
 
 	<form bind:this={post_form} class="new-post-form" method="POST" action={form_action}>
+		<input type="hidden" name="return_to" value={return_to} />
 		<textarea
 			name="content"
 			rows="7"

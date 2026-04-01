@@ -18,7 +18,13 @@
 	{#if user && data.posts && data.posts.length > 0}
 		<div class="feed">
 			{#each data.posts as post}
-				<PostCard {post} {user} can_manage={true} />
+				<PostCard
+					{post}
+					{user}
+					can_manage={true}
+					current_user_id={data.userId}
+					current_path={data.currentPath}
+				/>
 			{/each}
 		</div>
 	{:else}

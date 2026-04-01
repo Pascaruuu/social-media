@@ -1,10 +1,23 @@
 <script lang="ts">
 	import ConfirmationModal from './confirmation_modal.svelte'
 	import default_profile from '$lib/assets/empty_profile.png'
+	import { helpers } from '$lib/helpers'
 
-	let { post, user, can_manage = false } = $props()
+	let { post, user, can_manage = false, current_user_id = null, current_path = '/' } = $props()
 	let show_delete_confirm = $state(false)
 	let delete_form = $state<HTMLFormElement | undefined>(undefined)
+
+	function get_author_profile_href() {
+		if (current_user_id && post.user_id === current_user_id) {
+			return '/profile'
+		}
+
+		return `/profile/${encodeURIComponent(post.user_id)}`
+	}
+
+	function get_edit_post_href() {
+		return `/post/edit/${post.id}?return_to=${encodeURIComponent(current_path)}`
+	}
 
 	function open_delete_modal() {
 		show_delete_confirm = true
@@ -24,22 +37,36 @@
 	<div class="post-card-header">
 		<div>
 			<div class="post-author-row">
-				<img
-					class="post-author-logo"
-					src={user.imageUrl || default_profile}
-					alt=""
-					aria-hidden="true"
-				/>
-				<p class="post-author">{user.fullName || user.username || 'guest'}</p>
+				<a
+					class="post-author-link"
+					href={get_author_profile_href()}
+					aria-label={`View profile of ${user.fullName || user.username || 'user'}`}
+				>
+					<img
+						class="post-author-logo"
+						src={user.imageUrl || default_profile}
+						alt=""
+						aria-hidden="true"
+					/>
+				</a>
+				<div>
+					<a
+						class="post-author-link"
+						href={get_author_profile_href()}
+						aria-label={`View profile of ${user.fullName || user.username || 'user'}`}
+					>
+						<p class="post-author">{user.fullName || user.username || 'guest'}</p>
+					</a>
+					<p class="post-date">{helpers.formatDate(post.created_at)}</p>
+				</div>
 			</div>
-			<p class="post-date">{new Date(post.created_at).toLocaleString()}</p>
 		</div>
 
 		{#if can_manage}
 			<div class="post-card-actions">
 				<a
 					class="icon-action-btn"
-					href={`/post/edit/${post.id}`}
+					href={get_edit_post_href()}
 					aria-label="Edit post"
 					title="Edit post"
 				>
@@ -51,6 +78,7 @@
 
 				<form bind:this={delete_form} method="POST" action="?/delete_post" class="icon-action-form">
 					<input type="hidden" name="post_id" value={post.id} />
+					<input type="hidden" name="return_to" value={current_path} />
 					<button
 						class="icon-action-btn danger-action"
 						type="button"
@@ -72,10 +100,10 @@
 	</div>
 
 	<p class="post-content">{post.content}</p>
-	<div class="stats">
+	<!-- <div class="stats">
 		<span>Like 0</span>
 		<span>Views 0</span>
-	</div>
+	</div> -->
 </article>
 
 <ConfirmationModal

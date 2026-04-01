@@ -11,11 +11,13 @@
 			<div class="card"><p>No posts yet.</p></div>
 		{:else}
 			{#each data.posts as post}
-				<!-- <article class="card">
-					<p class="meta">@{post.author_username} - {new Date(post.created_at).toLocaleString()}</p>
-					<p>{post.content}</p>
-				</article> -->
-				<PostCard {post} user={post.author} />
+				<PostCard
+					{post}
+					user={post.author}
+					current_user_id={data.userId ?? null}
+					current_path={data.currentPath}
+					can_manage={Boolean(data.userId && data.userId === post.user_id)}
+				/>
 			{/each}
 		{/if}
 	</div>

@@ -1,14 +1,20 @@
 import { error, fail, redirect } from '@sveltejs/kit'
 import type { Actions, PageServerLoad } from './$types'
-import { mock_functions } from '$lib/mock_data'
+import { get_post_by_id, update_post } from '$lib/posts'
+import { normalize_return_to } from '$lib/return_to'
 
-export const load: PageServerLoad = ({ locals, params }) => {
+export const load: PageServerLoad = async ({ locals, params, url }) => {
 	const auth = locals.auth()
 	if (!auth.userId) {
 		throw redirect(302, '/login')
 	}
 
-	const post = mock_functions.mock_get_posts().find((item) => item.id === params.id)
+	const post_id = Number(params.id)
+	if (!Number.isInteger(post_id) || post_id <= 0) {
+		throw error(404, 'Post not found.')
+	}
+
+	const post = await get_post_by_id(post_id)
 	if (!post) {
 		throw error(404, 'Post not found.')
 	}
@@ -17,7 +23,10 @@ export const load: PageServerLoad = ({ locals, params }) => {
 		throw error(403, 'You can only edit your own posts.')
 	}
 
-	return { post }
+	return {
+		post,
+		return_to: normalize_return_to(url.searchParams.get('return_to'), '/profile'),
+	}
 }
 
 export const actions: Actions = {
@@ -29,7 +38,14 @@ export const actions: Actions = {
 			})
 		}
 
-		const existing_post = mock_functions.mock_get_posts().find((item) => item.id === params.id)
+		const post_id = Number(params.id)
+		if (!Number.isInteger(post_id) || post_id <= 0) {
+			return fail(404, {
+				edit_error: 'Post not found.',
+			})
+		}
+
+		const existing_post = await get_post_by_id(post_id)
 		if (!existing_post) {
 			return fail(404, {
 				edit_error: 'Post not found.',
@@ -44,6 +60,7 @@ export const actions: Actions = {
 
 		const form_data = await request.formData()
 		const content = String(form_data.get('content') ?? '').trim()
+		const return_to = normalize_return_to(form_data.get('return_to'), '/profile')
 
 		if (!content) {
 			return fail(400, {
@@ -51,7 +68,7 @@ export const actions: Actions = {
 			})
 		}
 
-		mock_functions.mock_edit_post(params.id, content)
-		throw redirect(303, '/profile')
+		await update_post(post_id, auth.userId, { content })
+		throw redirect(303, return_to)
 	},
 }
