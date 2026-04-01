@@ -18,7 +18,8 @@
 			post_content={data.post.content}
 			form_action="?/edit_post"
 			submit_label="Save post"
-			cancel_href="/profile"
+			cancel_href={data.return_to}
+			return_to={data.return_to}
 			confirm_cancel={true}
 			confirm_submit={true}
 			cancel_confirm_title="Discard post changes?"

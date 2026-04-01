@@ -12,6 +12,7 @@ words:
   - Vicheka
   - Veansna
   - prepush
+  - unixepoch
 ignorePaths:
   - node_modules/**
   - .svelte-kit/**
@@ -33,6 +34,7 @@ ignorePaths:
   - src/lib/server/data/n3vocab.txt
   - static/decks/**
   - cspell.config.yaml
+  - src/style.css
 import:
   - '@cspell/dict-typescript/cspell-ext.json'
   - '@cspell/dict-html/cspell-ext.json'

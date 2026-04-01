@@ -207,12 +207,12 @@ textarea:focus {
 .feed {
 	display: flex;
 	flex-direction: column;
-	gap: 32px;
+	gap: 14px;
 }
 
 .card {
 	border-bottom: 1px solid var(--clerk-gray-100);
-	padding-bottom: 32px;
+	padding-bottom: 14px;
 }
 
 .meta {
@@ -458,7 +458,6 @@ button:hover {
 /* --- COMPACT PROFILE STYLE --- */
 
 .profile-compact {
-	padding: 24px 0;
 	margin-bottom: 24px;
 }
 
@@ -504,6 +503,28 @@ button:hover {
 	margin: 20px 0;
 }
 
+.profile-emails-card {
+	padding-top: 4px;
+}
+
+.profile-emails-list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	list-style: none;
+}
+
+.profile-emails-list a {
+	color: var(--clerk-text-main);
+	text-decoration: none;
+	font-size: 0.9rem;
+}
+
+.profile-emails-list a:hover {
+	color: var(--clerk-orange);
+	text-decoration: underline;
+}
+
 .action-slot {
 	margin-left: auto;
 }
@@ -511,7 +532,7 @@ button:hover {
 .profile-post-card {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
+	gap: 10px;
 }
 
 .post-card-header {
@@ -534,9 +555,21 @@ button:hover {
 	gap: 8px;
 }
 
+.post-author-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	text-decoration: none;
+	color: inherit;
+}
+
+.post-author-link:hover .post-author {
+	color: var(--clerk-orange);
+}
+
 .post-author-logo {
-	width: 28px;
-	height: 28px;
+	width: 38px;
+	height: 38px;
 	border-radius: 50%;
 	object-fit: cover;
 	border: 1px solid var(--clerk-gray-200);
@@ -544,7 +577,6 @@ button:hover {
 
 .post-date {
 	font-size: 0.65rem;
-	font-weight: 500;
 	color: #a1a1aa;
 	margin-top: 2px;
 }

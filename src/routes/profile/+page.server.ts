@@ -1,22 +1,22 @@
 import { fail, redirect } from '@sveltejs/kit'
 import type { Actions, PageServerLoad } from './$types'
-import { mock_functions, type Post } from '$lib/mock_data'
+import { delete_post, get_post_by_id, get_user_posts, type StoredPost } from '$lib/posts'
+import { normalize_return_to } from '$lib/return_to'
 
-type ProfilePost = Post
+type ProfilePost = StoredPost
 
-export const load: PageServerLoad = ({ locals }) => {
+export const load: PageServerLoad = async ({ locals, url }) => {
 	const auth = locals.auth()
 	if (!auth.userId) {
 		throw redirect(302, '/login')
 	}
 
-	const posts: ProfilePost[] = mock_functions
-		.mock_get_user_posts(auth.userId)
-		.sort((a, b) => b.created_at.getTime() - a.created_at.getTime())
+	const posts: ProfilePost[] = await get_user_posts(auth.userId)
 
 	return {
 		userId: auth.userId,
 		posts,
+		currentPath: `${url.pathname}${url.search}`,
 	}
 }
 
@@ -28,13 +28,14 @@ export const actions: Actions = {
 		}
 
 		const form_data = await request.formData()
-		const post_id = String(form_data.get('post_id') ?? '')
+		const post_id = Number(form_data.get('post_id'))
+		const return_to = normalize_return_to(form_data.get('return_to'), '/profile')
 
-		if (!post_id) {
+		if (!Number.isInteger(post_id) || post_id <= 0) {
 			return fail(400, { delete_error: 'Post id is required.' })
 		}
 
-		const post = mock_functions.mock_get_posts().find((item) => item.id === post_id)
+		const post = await get_post_by_id(post_id)
 		if (!post) {
 			return fail(404, { delete_error: 'Post not found.' })
 		}
@@ -43,7 +44,7 @@ export const actions: Actions = {
 			return fail(403, { delete_error: 'You can only delete your own posts.' })
 		}
 
-		mock_functions.mock_delete_post(post_id)
-		return { delete_success: true }
+		await delete_post(post_id, auth.userId)
+		throw redirect(303, return_to)
 	},
 }

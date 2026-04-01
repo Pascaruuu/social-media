@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state'
 	import { ClerkProvider, UserButton, Show } from 'svelte-clerk'
 	import SearchBar from './components/search_bar.svelte'
 	import logo from '$lib/assets/logo.png'
@@ -31,6 +32,8 @@
 			},
 		}
 	}
+
+	const return_to = $derived(encodeURIComponent(`${page.url.pathname}${page.url.search}`))
 </script>
 
 <ClerkProvider publishableKey={data.publishableKey}>
@@ -99,7 +102,7 @@
 		<Show when="signed-in">
 			<a
 				class="composer-toggle"
-				href="/post/new"
+				href={`/post/new?return_to=${return_to}`}
 				aria-label="Create new post"
 				title="Create new post"
 			>

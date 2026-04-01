@@ -34,7 +34,7 @@ async function main() {
 		posts_to_insert.push({
 			authorId: faker.helpers.arrayElement(mock_clerk_user_ids),
 			content: faker.lorem.paragraph(),
-			// createdAt will default to CURRENT_TIMESTAMP automatically
+			createdAt: faker.date.recent({ days: 30 }),
 		})
 	}
 

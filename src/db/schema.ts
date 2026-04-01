@@ -8,7 +8,9 @@ export const posts = sqliteTable(
 		id: integer('id').primaryKey({ autoIncrement: true }),
 		authorId: text('author_id').notNull(),
 		content: text('content').notNull(),
-		createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(CURRENT_TIMESTAMP)`),
+		createdAt: integer('created_at', { mode: 'timestamp' })
+			.notNull()
+			.default(sql`(unixepoch())`),
 	},
 	(table) => [
 		// Use an array instead of an object for the extraConfig
