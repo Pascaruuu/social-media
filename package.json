@@ -4,6 +4,8 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
+		"preinstall": "pnpm dlx @aikidosec/safe-chain setup-ci",
+		"postinstall": "lefthook install",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -18,6 +20,16 @@
 		"lefthook:prepush": "lefthook run pre-push",
 		"prevent-main-commit": "tsx scripts/prevent-main-commit.ts",
 		"update:latest": "pnpm update --latest"
+	},
+	"packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1fa",
+	"engines": {
+		"node": ">=22.16.0"
+	},
+	"devEngines": {
+		"packageManager": {
+			"name": "pnpm",
+			"onFail": "error"
+		}
 	},
 	"devDependencies": {
 		"@eslint/compat": "^2.0.3",
