@@ -20,7 +20,14 @@ const svelte_config_for_eslint = {
 export default defineConfig(
 	includeIgnoreFile(gitignore_path),
 	{
-		ignores: ['.svelte-kit/**', 'dist/**', 'build/**', 'coverage/**', 'src/**/*.d.ts'],
+		ignores: [
+			'.svelte-kit/**',
+			'dist/**',
+			'build/**',
+			'coverage/**',
+			'src/**/*.d.ts',
+			'src/**/*.svelte',
+		],
 	},
 	js.configs.recommended,
 	...ts.configs.recommended,

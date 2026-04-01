@@ -1,0 +1,736 @@
+/* --- CLERK-INSPIRED THEME --- */
+:root {
+	--sidebar-width: 72px;
+	--clerk-orange: #ff6000;
+	--clerk-gray-100: #f4f4f5;
+	--clerk-gray-200: #e4e4e7;
+	--clerk-text-main: #111827;
+	--clerk-text-muted: #71717a;
+	--border-radius: 12px;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family:
+		'Inter',
+		-apple-system,
+		system-ui,
+		sans-serif;
+}
+
+body {
+	background-color: #ffffff;
+	color: var(--clerk-text-main);
+}
+
+/* --- LAYOUT --- */
+.app {
+	display: flex;
+	min-height: 100vh;
+}
+
+/* Sidebar Styling (Layout Header) */
+.topbar {
+	width: var(--sidebar-width);
+	height: 100vh;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background: #fafafa;
+	border-right: 1px solid var(--clerk-gray-200);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 24px 0;
+	z-index: 100;
+}
+
+.topbar .brand {
+	display: block;
+	text-decoration: none;
+	margin-bottom: 40px;
+	line-height: 0;
+}
+
+.topbar .brand-logo {
+	width: 44px;
+	height: 44px;
+	display: block;
+	object-fit: contain;
+}
+
+.mobile-top-search {
+	display: none;
+}
+
+.desktop-top-search {
+	display: block;
+}
+
+.topbar nav {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	align-items: center;
+}
+
+.topbar nav a {
+	text-decoration: none;
+	color: var(--clerk-text-muted);
+	font-size: 0.75rem;
+	font-weight: 500;
+	transition: color 0.2s;
+}
+
+.topbar nav .nav-icon-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border-radius: 10px;
+	border: 1px solid transparent;
+	transition:
+		color 0.2s,
+		background-color 0.2s,
+		border-color 0.2s;
+}
+
+.topbar nav .nav-icon {
+	width: 20px;
+	height: 20px;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.8;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.topbar nav .nav-icon-link:hover {
+	background: rgba(255, 96, 0, 0.08);
+	border-color: rgba(255, 96, 0, 0.2);
+}
+
+.topbar nav .guest-menu {
+	position: relative;
+}
+
+.topbar nav .guest-trigger {
+	background: #fff;
+}
+
+.topbar nav .guest-icon {
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 1px solid var(--clerk-gray-200);
+}
+
+.topbar nav .guest-dropdown {
+	position: absolute;
+	top: 0;
+	left: calc(100% + 10px);
+	min-width: 104px;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	padding: 6px;
+	background: #fff;
+	border: 1px solid var(--clerk-gray-200);
+	border-radius: 10px;
+	box-shadow:
+		0 10px 24px rgba(0, 0, 0, 0.08),
+		0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.topbar nav .guest-dropdown a {
+	padding: 7px 10px;
+	border-radius: 8px;
+	font-size: 0.78rem;
+	font-weight: 600;
+	color: var(--clerk-text-main);
+	white-space: nowrap;
+}
+
+.topbar nav .guest-dropdown a:hover {
+	background: rgba(255, 96, 0, 0.08);
+	color: var(--clerk-orange);
+}
+
+.topbar nav a:hover {
+	color: var(--clerk-orange);
+}
+
+/* --- CONTENT AREA --- */
+.content {
+	margin-left: var(--sidebar-width);
+	flex-grow: 1;
+	padding: 40px;
+	max-width: 700px;
+}
+
+/* Search Input (matching your sketch) */
+h1 {
+	font-size: 1.1rem;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+
+/* Mimicking the search bar shape from your sketch */
+.search-container {
+	margin-bottom: 40px;
+}
+
+input[type='text'],
+textarea {
+	width: 100%;
+	padding: 12px 16px;
+	border: 1px solid var(--clerk-gray-200);
+	border-radius: var(--border-radius);
+	font-size: 0.95rem;
+	transition:
+		border-color 0.2s,
+		box-shadow 0.2s;
+}
+
+input[type='text']:focus,
+textarea:focus {
+	outline: none;
+	border-color: var(--clerk-orange);
+	box-shadow: 0 0 0 2px rgba(255, 96, 0, 0.1);
+}
+
+/* --- POST CARDS --- */
+.feed {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+.card {
+	border-bottom: 1px solid var(--clerk-gray-100);
+	padding-bottom: 32px;
+}
+
+.meta {
+	font-size: 0.85rem;
+	color: var(--clerk-text-muted);
+	margin-bottom: 12px;
+}
+
+.image-placeholder {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	background: var(--clerk-gray-100);
+	border-radius: var(--border-radius);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 16px 0;
+	color: var(--clerk-text-muted);
+	font-size: 2rem;
+}
+
+.stats {
+	display: flex;
+	gap: 20px;
+	font-size: 0.9rem;
+	color: var(--clerk-text-muted);
+}
+
+.stats span {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	cursor: pointer;
+}
+
+.stats span:hover {
+	color: var(--clerk-orange);
+}
+
+/* --- BUTTONS --- */
+button,
+.btn {
+	background-color: var(--clerk-orange);
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 8px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: filter 0.2s;
+}
+
+button:hover {
+	filter: brightness(1.1);
+}
+
+/* Floating Action Button (Matches the bottom-right circle in your sketch) */
+.composer-toggle {
+	position: fixed;
+	bottom: 40px;
+	right: 40px;
+	width: 45px;
+	height: 45px;
+	background: var(--clerk-orange);
+	color: white;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	font-size: 1.4rem;
+	box-shadow: 0 4px 12px rgba(255, 96, 0, 0.3);
+	transition: transform 0.2s;
+}
+
+.composer-toggle:hover {
+	transform: scale(1.05);
+}
+
+.composer-icon {
+	width: 20px;
+	height: 20px;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 2.2;
+	stroke-linecap: round;
+}
+
+.new-post-overlay {
+	min-height: calc(100vh - 80px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 24px;
+	background:
+		radial-gradient(circle at top right, rgba(255, 96, 0, 0.08), transparent 40%),
+		linear-gradient(180deg, rgba(17, 24, 39, 0.04), rgba(17, 24, 39, 0.01));
+	border-radius: 18px;
+}
+
+.new-post-modal {
+	width: min(560px, 100%);
+	padding: 22px 22px 18px;
+	background: #fff;
+	border: 1px solid var(--clerk-gray-200);
+	border-radius: 16px;
+	box-shadow:
+		0 16px 40px rgba(0, 0, 0, 0.08),
+		0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.new-post-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.new-post-title {
+	margin: 0;
+	font-size: 1.1rem;
+	font-weight: 700;
+}
+
+.new-post-close {
+	width: 34px;
+	height: 34px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 999px;
+	text-decoration: none;
+	color: var(--clerk-text-muted);
+	border: 1px solid var(--clerk-gray-200);
+	background: #fff;
+	transition:
+		color 0.2s,
+		border-color 0.2s,
+		background-color 0.2s;
+}
+
+.new-post-close svg {
+	width: 16px;
+	height: 16px;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.9;
+	stroke-linecap: round;
+}
+
+.new-post-close:hover {
+	color: var(--clerk-orange);
+	border-color: rgba(255, 96, 0, 0.35);
+	background: rgba(255, 96, 0, 0.08);
+}
+
+.new-post-subtitle {
+	margin: 8px 0 14px;
+	font-size: 0.9rem;
+	color: var(--clerk-text-muted);
+}
+
+.new-post-form {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.new-post-form textarea {
+	min-height: 170px;
+	resize: vertical;
+}
+
+.new-post-error {
+	color: #dc2626;
+	font-size: 0.85rem;
+}
+
+.new-post-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 12px;
+	margin-top: 2px;
+}
+
+.new-post-cancel {
+	text-decoration: none;
+	color: var(--clerk-text-muted);
+	font-size: 0.9rem;
+}
+
+.new-post-cancel:hover {
+	color: var(--clerk-orange);
+}
+
+.new-post-submit {
+	width: 42px;
+	height: 42px;
+	padding: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 999px;
+	border: none;
+}
+
+.new-post-submit svg {
+	width: 18px;
+	height: 18px;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 2.1;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+/* Auth Centering */
+.auth-wrap {
+	position: fixed;
+	inset: 0;
+	z-index: 1200;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+	background: rgba(15, 23, 42, 0.45);
+	backdrop-filter: blur(3px);
+}
+
+.auth-wrap :global(.cl-rootBox),
+.auth-wrap :global(.cl-card) {
+	max-width: min(430px, 92vw);
+}
+
+.auth-wrap :global(.cl-card) {
+	border-radius: 14px;
+	box-shadow:
+		0 16px 40px rgba(0, 0, 0, 0.2),
+		0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* --- COMPACT PROFILE STYLE --- */
+
+.profile-compact {
+	padding: 24px 0;
+	margin-bottom: 24px;
+}
+
+.user-identity-bar {
+	display: flex;
+	align-items: center; /* Vertical centering */
+	gap: 16px;
+}
+
+.avatar-small {
+	width: 80px; /* Small circle size */
+	height: 80px;
+	border-radius: 50%;
+	border: 1px solid var(--clerk-gray-200);
+	object-fit: cover;
+	background-color: var(--clerk-gray-100);
+}
+
+.name-stack {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	flex-grow: 1;
+}
+
+.display-name {
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin: 0;
+	color: var(--clerk-text-main);
+	line-height: 1.2;
+}
+
+.handle {
+	font-size: 0.9rem;
+	color: var(--clerk-text-muted);
+	margin: 0;
+}
+
+.divider {
+	border: 0;
+	border-top: 1px solid var(--clerk-gray-100);
+	margin: 20px 0;
+}
+
+.action-slot {
+	margin-left: auto;
+}
+
+.profile-post-card {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.post-card-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.post-author {
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: var(--clerk-text-main);
+	padding-left: 5px;
+}
+
+.post-author-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.post-author-logo {
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 1px solid var(--clerk-gray-200);
+}
+
+.post-date {
+	font-size: 0.65rem;
+	font-weight: 500;
+	color: #a1a1aa;
+	margin-top: 2px;
+}
+
+.post-content {
+	font-size: 0.96rem;
+	line-height: 1.5;
+}
+
+.post-card-actions {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.icon-action-form {
+	margin: 0;
+}
+
+.post-card-actions .icon-action-btn {
+	width: 32px;
+	height: 32px;
+	padding: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	background: #fff;
+	color: var(--clerk-text-muted);
+	border: 1px solid var(--clerk-gray-200);
+	border-radius: 8px;
+	transition:
+		color 0.2s,
+		border-color 0.2s,
+		background-color 0.2s;
+}
+
+.post-card-actions .icon-action-btn svg {
+	width: 16px;
+	height: 16px;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.8;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.post-card-actions .icon-action-btn:hover {
+	color: var(--clerk-orange);
+	border-color: rgba(255, 96, 0, 0.35);
+	background: rgba(255, 96, 0, 0.08);
+	filter: none;
+}
+
+.post-card-actions .danger-action:hover {
+	color: #dc2626;
+	border-color: rgba(220, 38, 38, 0.35);
+	background: rgba(220, 38, 38, 0.08);
+}
+
+/* Optional: Make the SignOutButton match the minimalist orange style */
+.action-slot button {
+	background: transparent;
+	color: var(--clerk-orange);
+	border: 1px solid var(--clerk-orange);
+	padding: 6px 12px;
+	border-radius: 6px;
+	font-size: 0.85rem;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.action-slot button:hover {
+	background: var(--clerk-orange);
+	color: white;
+}
+
+/* --- RESPONSIVE HARDENING --- */
+body {
+	overflow-x: hidden;
+}
+
+.app {
+	width: 100%;
+}
+
+.topbar nav > * {
+	flex-shrink: 0;
+}
+
+.content {
+	width: calc(100% - var(--sidebar-width));
+	max-width: none;
+	margin-right: 0;
+	min-width: 0;
+	padding: clamp(18px, 3vw, 40px);
+}
+
+.feed,
+.card,
+.profile-post-card {
+	width: 100%;
+	min-width: 0;
+}
+
+.stats {
+	flex-wrap: wrap;
+}
+
+.post-card-header {
+	flex-wrap: wrap;
+}
+
+.post-author {
+	overflow-wrap: anywhere;
+}
+
+.post-card-actions {
+	margin-left: auto;
+	flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+	.topbar {
+		width: 100%;
+		height: 66px;
+		position: fixed;
+		left: 0;
+		top: 0;
+		flex-direction: row;
+		justify-content: space-between;
+		padding: 0 12px;
+		border-right: none;
+		border-bottom: 1px solid var(--clerk-gray-200);
+	}
+
+	.topbar .brand {
+		margin-bottom: 0;
+		flex-shrink: 0;
+	}
+
+	.topbar .brand-logo {
+		width: 34px;
+		height: 34px;
+	}
+
+	.topbar nav {
+		flex-direction: row;
+		gap: 10px;
+		flex-shrink: 0;
+	}
+
+	.topbar nav .nav-icon-link {
+		width: 34px;
+		height: 34px;
+	}
+
+	.topbar nav .guest-dropdown {
+		top: calc(100% + 8px);
+		right: 0;
+		left: auto;
+	}
+
+	.mobile-top-search {
+		display: block;
+		flex: 1;
+		min-width: 0;
+		padding: 0 10px;
+	}
+
+	.desktop-top-search {
+		display: none;
+	}
+
+	.content {
+		margin-left: 0;
+		width: 100%;
+		padding: 82px 24px 20px;
+	}
+
+	.composer-toggle {
+		right: 16px;
+		bottom: 16px;
+	}
+
+	.new-post-overlay {
+		padding: 12px;
+	}
+}
