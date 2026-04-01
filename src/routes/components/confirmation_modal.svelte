@@ -197,16 +197,6 @@
 		justify-content: center;
 	}
 
-	.confirm-icon svg {
-		width: 18px;
-		height: 18px;
-		fill: none;
-		stroke: currentColor;
-		stroke-width: 1.9;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-	}
-
 	.confirm-title {
 		font-size: 1rem;
 		font-weight: 700;
