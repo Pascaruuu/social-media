@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Show } from 'svelte-clerk'
 	import ConfirmationModal from './confirmation_modal.svelte'
 	import default_profile from '$lib/assets/empty_profile.png'
 	import { helpers } from '$lib/helpers'
@@ -63,51 +62,48 @@
 			</div>
 		</div>
 
-		<Show when="signed-in">
-			{#if can_manage}
-				<div class="post-card-actions">
-					<a
-						class="icon-action-btn"
-						href={get_edit_post_href()}
-						aria-label="Edit post"
-						title="Edit post"
+		{#if can_manage}
+			<div class="post-card-actions">
+				<a
+					class="icon-action-btn"
+					href={get_edit_post_href()}
+					aria-label="Edit post"
+					title="Edit post"
+				>
+					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<path d="M4 20h4.5L19 9.5 14.5 5 4 15.5V20Z" />
+						<path d="M12.5 7 17 11.5" />
+					</svg>
+				</a>
+
+				<form bind:this={delete_form} method="POST" action="?/delete_post" class="icon-action-form">
+					<input type="hidden" name="post_id" value={post.id} />
+					<input type="hidden" name="return_to" value={current_path} />
+					<button
+						class="icon-action-btn danger-action"
+						type="button"
+						aria-label="Delete post"
+						title="Delete post"
+						onclick={open_delete_modal}
 					>
 						<svg viewBox="0 0 24 24" aria-hidden="true">
-							<path d="M4 20h4.5L19 9.5 14.5 5 4 15.5V20Z" />
-							<path d="M12.5 7 17 11.5" />
+							<path d="M5 7h14" />
+							<path d="M9 7V5h6v2" />
+							<path d="M8 7l1 12h6l1-12" />
+							<path d="M10.5 10.5v6" />
+							<path d="M13.5 10.5v6" />
 						</svg>
-					</a>
-
-					<form
-						bind:this={delete_form}
-						method="POST"
-						action="?/delete_post"
-						class="icon-action-form"
-					>
-						<input type="hidden" name="post_id" value={post.id} />
-						<input type="hidden" name="return_to" value={current_path} />
-						<button
-							class="icon-action-btn danger-action"
-							type="button"
-							aria-label="Delete post"
-							title="Delete post"
-							onclick={open_delete_modal}
-						>
-							<svg viewBox="0 0 24 24" aria-hidden="true">
-								<path d="M5 7h14" />
-								<path d="M9 7V5h6v2" />
-								<path d="M8 7l1 12h6l1-12" />
-								<path d="M10.5 10.5v6" />
-								<path d="M13.5 10.5v6" />
-							</svg>
-						</button>
-					</form>
-				</div>
-			{/if}
-		</Show>
+					</button>
+				</form>
+			</div>
+		{/if}
 	</div>
 
 	<p class="post-content">{post.content}</p>
+	<!-- <div class="stats">
+		<span>Like 0</span>
+		<span>Views 0</span>
+	</div> -->
 </article>
 
 <ConfirmationModal
