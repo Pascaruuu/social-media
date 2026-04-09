@@ -21,8 +21,8 @@ importers:
   .:
     dependencies:
       '@clerk/backend':
-        specifier: 3.2.4
-        version: 3.2.4(react@19.2.4)
+        specifier: 3.2.3
+        version: 3.2.3(react@19.2.4)
       '@clerk/clerk-js':
         specifier: ^6.4.0
         version: 6.4.0(@solana/web3.js@1.98.4(bufferutil@4.1.0)(typescript@6.0.2)(utf-8-validate@6.0.6))(bs58@6.0.0)(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(react-native@0.84.1(@babel/core@7.29.0)(bufferutil@4.1.0)(react@19.2.4)(utf-8-validate@6.0.6))(react@19.2.4)(typescript@6.0.2)(utf-8-validate@6.0.6)(zod@4.3.6)
@@ -30,7 +30,7 @@ importers:
         specifier: ^0.17.2
         version: 0.17.2(bufferutil@4.1.0)(utf-8-validate@6.0.6)
       devalue:
-        specifier: ^5.6.4
+        specifier: '>=5.6.4'
         version: 5.6.4
       dotenv:
         specifier: ^17.4.1
@@ -120,6 +120,9 @@ importers:
       typescript-eslint:
         specifier: ^8.58.0
         version: 8.58.0(eslint@10.2.0)(typescript@6.0.2)
+      vite:
+        specifier: 8.0.5
+        version: 8.0.5(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.28.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
 
 packages:
 
@@ -285,10 +288,6 @@ packages:
 
   '@clerk/backend@3.2.3':
     resolution: {integrity: sha512-I3YLnSioYFG+EVFBYm0ilN28+FC8H+hkqMgB5Pdl7AcotQOn3JhiZMqLel2H0P390p8FEJKQNnrvXk3BemeKKQ==}
-    engines: {node: '>=20.9.0'}
-
-  '@clerk/backend@3.2.4':
-    resolution: {integrity: sha512-zEK0xE47dVZl1AAovMbiG95kxXjEt9A2RKNEmIJveuXoNdX5AK5yV6vdCEFTblhymlFAYvTr+NHIe6iJAtp50g==}
     engines: {node: '>=20.9.0'}
 
   '@clerk/clerk-js@6.4.0':
@@ -3737,15 +3736,6 @@ snapshots:
       - zod
 
   '@clerk/backend@3.2.3(react@19.2.4)':
-    dependencies:
-      '@clerk/shared': 4.4.0(react@19.2.4)
-      standardwebhooks: 1.0.0
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - react
-      - react-dom
-
-  '@clerk/backend@3.2.4(react@19.2.4)':
     dependencies:
       '@clerk/shared': 4.4.0(react@19.2.4)
       standardwebhooks: 1.0.0
